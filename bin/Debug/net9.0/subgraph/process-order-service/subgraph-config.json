@@ -1,0 +1,1 @@
+{"subgraph":"process-order-service", "http":{"baseAddress":"http://localhost:8083/graphql"}}

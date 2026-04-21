@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\FusionPOC\\FusionGateway\\FusionGateway.csproj": {}
+    "F:\\SpringBoot\\PlantApps\\fusion-gateway-service\\FusionGateway.csproj": {}
   },
   "projects": {
-    "F:\\FusionPOC\\FusionGateway\\FusionGateway.csproj": {
+    "F:\\SpringBoot\\PlantApps\\fusion-gateway-service\\FusionGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\FusionPOC\\FusionGateway\\FusionGateway.csproj",
+        "projectUniqueName": "F:\\SpringBoot\\PlantApps\\fusion-gateway-service\\FusionGateway.csproj",
         "projectName": "FusionGateway",
-        "projectPath": "F:\\FusionPOC\\FusionGateway\\FusionGateway.csproj",
+        "projectPath": "F:\\SpringBoot\\PlantApps\\fusion-gateway-service\\FusionGateway.csproj",
         "packagesPath": "C:\\Users\\Sovon Singha\\.nuget\\packages\\",
-        "outputPath": "F:\\FusionPOC\\FusionGateway\\obj\\",
+        "outputPath": "F:\\SpringBoot\\PlantApps\\fusion-gateway-service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sovon Singha\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FusionGateway")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+527830bf5c12578da12ea3afb58078accc4772c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4b5911ce362c94df9d55c82a20739d99e08424d")]
 [assembly: System.Reflection.AssemblyProductAttribute("FusionGateway")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FusionGateway")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
