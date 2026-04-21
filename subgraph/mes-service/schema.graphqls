@@ -1,0 +1,146 @@
+directive @lookup on FIELD_DEFINITION
+directive @internal on FIELD_DEFINITION
+directive @sharable on INTERFACE | OBJECT | FIELD_DEFINITION
+
+type Query
+{
+    departments(where: DepartmentFilter, first: Int, before: String, after: String, order: DepartmentOrder): DepartmentConnection
+    productionLines(where: ProductionLineFilter, first: Int, before: String, after: String, order: ProductionLineOrder): ProductionLineConnection
+    productionUnits(where: ProductionUnitFilter, first: Int, last: Int, before: String, after: String, order: ProductionUnitOrder): ProductionUnitConnection
+
+    departmentsById(departmentId: [Float!]): [Department] @lookup @internal
+    productionLinesById(productionLineId: [Float!]): [ProductionLine] @lookup @internal
+    productionUnitsById(productionUnitId: [Float]): [ProductionUnit] @lookup @internal
+}
+
+input DepartmentFilter
+{
+    id: String
+    departmentId: ID
+    department: String
+}
+
+input DepartmentOrder
+{
+    id: SortOrder
+    departmentId: SortOrder
+    department: SortOrder
+}
+
+type DepartmentConnection
+{
+    edges: [DepartmentEdge]
+    pageInfo: PageInfo!
+}
+
+type DepartmentEdge
+{
+    node: Department
+    cursor: String!
+}
+
+type Department implements Node @sharable
+{
+    id: ID!
+    departmentId: Float
+    department: String
+    productionLines(where: ProductionLineFilter, first: Int, last: Int, after: String, before: String, order: ProductionLineOrder): ProductionLineConnection
+}
+
+type ProductionLineConnection
+{
+    edges: [ProductionLineEdge]
+    pageInfo: PageInfo!
+}
+
+type ProductionLineEdge
+{
+    node: ProductionLine
+    cursor: String!
+}
+
+input ProductionLineFilter
+{
+    id: String
+    productionLineId: ID
+    departmentId: Float
+    line: String
+    department: DepartmentFilter
+}
+#
+input ProductionLineOrder
+{
+    id: SortOrder
+    productionLineId: SortOrder
+    departmentId: SortOrder
+    line: SortOrder
+    department: DepartmentOrder
+}
+#
+type ProductionLine implements Node @sharable
+{
+    id: ID!
+    productionLineId: Float
+    departmentId: Float
+    line: String
+    department: Department
+    productionUnits(where: ProductionUnitFilter, first: Int, last: Int, after: String, before: String, order: ProductionUnitOrder): ProductionUnitConnection
+}
+
+type PageInfo
+{
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+input ProductionUnitFilter
+{
+    id: String
+    productionUnitId: ID
+    unit: String
+    productionLineId: Float
+    productionLine: ProductionLineFilter
+}
+
+input ProductionUnitOrder
+{
+    id: SortOrder
+    productionUnitId: SortOrder
+    unit: SortOrder
+    productionLineId: SortOrder
+    productionLine: SortOrder
+}
+
+type ProductionUnitConnection
+{
+    edges: [ProductionUnitEdge]
+    pageInfo: PageInfo!
+}
+
+type ProductionUnitEdge
+{
+    node: ProductionUnit
+    cursor: String
+}
+
+type ProductionUnit implements Node @sharable
+{
+    id: ID!
+    productionUnitId: Float
+    unit: String
+    productionLineId: Float
+    productionLine: ProductionLine
+}
+
+enum SortOrder
+{
+    ASC
+    DESC
+}
+
+interface Node @sharable
+{
+    id: ID!
+}

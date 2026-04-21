@@ -1,0 +1,78 @@
+directive @lookup on FIELD_DEFINITION
+directive @internal on FIELD_DEFINITION
+directive @sharable on INTERFACE | OBJECT | FIELD_DEFINITION
+
+type Query
+{
+    processOrders(where: FilterProcessOrder, first: Int, after: String, last: Int, order: ProcessOrderOrder): ProcessOrderConnection
+    processOrderById(processOrderId: [Float!]): [ProcessOrder] @lookup @internal
+}
+
+type ProcessOrderConnection
+{
+    edges: [ProcessOrderEdge]
+    pageInfo: PageInfo
+}
+
+type ProcessOrderEdge
+{
+    node: ProcessOrder
+    cursor: String!
+}
+
+type ProcessOrder implements Node
+{
+    id: ID!
+    processOrderId: ID
+    orderNo: String
+    productId: Float
+    product: Product
+    productionUnitId: Float
+    productionUnit: ProductionUnit @lookup
+}
+
+type PageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+input FilterProcessOrder
+{
+    and: [FilterProcessOrder]
+    or: [FilterProcessOrder]
+    id: Float
+    orderNo: String
+    productId: Float
+    productionUnitId: Float
+}
+
+input ProcessOrderOrder
+{
+    id: SortDirection
+    processOrderId: SortDirection
+    orderNo: SortDirection
+    productId: SortDirection
+    productionUnitId: SortDirection
+}
+
+enum SortDirection
+{
+    ASC
+    DESC
+}
+
+interface Node
+{
+    id: ID!
+}
+
+type Product
+{
+    productId: Float @lookup
+}
+type ProductionUnit
+{
+    productionUnitId: Float
+}

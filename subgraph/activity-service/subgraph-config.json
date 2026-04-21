@@ -1,0 +1,1 @@
+{"subgraph":"activity-service", "http":{"baseAddress":"http://localhost:8080/graphql"}}

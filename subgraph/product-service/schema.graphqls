@@ -1,0 +1,64 @@
+directive @lookup on FIELD_DEFINITION
+directive @internal on FIELD_DEFINITION
+directive @sharable on INTERFACE | OBJECT | FIELD_DEFINITION
+
+type Query
+{
+    products(where: ProductFilter, before: String, after: String, first: Int, last:Int, order: productOrder): ProductConnection
+    productById(productId: [Float!]): [Product] @lookup @internal
+}
+
+type ProductConnection
+{
+    edges: [ProductEdge]
+    pageInfo: PageInfo!
+}
+
+type ProductEdge
+{
+    node: Product
+    cursor: String!
+}
+
+type Product implements Node
+{
+    id: ID!
+    productId: Float
+    prodCode: String
+    prodDescription: String
+}
+
+type PageInfo
+{
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+input ProductFilter
+{
+    and: [ProductFilter]
+    or: [ProductFilter]
+    productId: Float
+    prodCode: String
+    prodDescription: String
+}
+
+input productOrder
+{
+    productId: SortOrder
+    prodCode: SortOrder
+    prodDescription: SortOrder
+}
+
+enum SortOrder
+{
+    ASC
+    DESC
+}
+
+interface Node @sharable
+{
+    id:ID!
+}

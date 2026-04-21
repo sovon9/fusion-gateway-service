@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "jem1GKuaiLfSSscFqex1FqLkp45/GYmjEKGbYSMPYD8=",
+  "Source": "FusionGateway",
+  "BasePath": "_content/FusionGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

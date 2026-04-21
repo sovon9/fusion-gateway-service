@@ -1,0 +1,114 @@
+directive @lookup on FIELD_DEFINITION
+directive @internal on FIELD_DEFINITION
+directive @sharable on INTERFACE | OBJECT | FIELD_DEFINITION
+
+type Query
+{
+    activities(where: ActivityFilter, first: Int, after: String, last: Int, before: String, order: ActivityOrder) : ActivityConnection
+}
+
+interface Node @sharable
+{
+    id: ID!
+}
+
+input ActivityFilter
+{
+    and: [ActivityFilter]
+    or: [ActivityFilter]
+    activityId: ID
+    title: String
+    activityStatusId : Int
+    status: ActivityStatusFilter
+    activityTypeId: Int
+    type: ActivityTypeFilter
+    createdAt: String
+    productionUnitId: Float
+    processOrderId: Float
+}
+
+input ActivityStatusFilter
+{
+    activityStatusId: ID
+    activityStatusDesc: String
+}
+
+input ActivityTypeFilter
+{
+    activityTypeId: ID
+    activityDesc: String
+}
+
+type ActivityConnection
+{
+    edges: [ActivityEdge]
+    pageInfo: PageInfo!
+}
+
+type PageInfo
+{
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type ActivityEdge
+{
+    node: Activity
+    cursor: String!
+}
+
+type Activity implements Node @sharable
+{
+    id: ID!
+    activityId: ID
+    title: String
+    activityStatusId : Int
+    status: ActivityStatus
+    activityTypeId: Int
+    type: ActivityType
+    createdAt: String
+    productionUnitId: Float
+    processOrderId: Float
+}
+
+type ActivityStatus
+{
+    activityStatusId: ID
+    activityStatusDesc: String
+}
+
+type ActivityType
+{
+    activityTypeId: ID
+    activityDesc: String
+}
+
+input ActivityOrder
+{
+    activityId: SortOrder
+    title: SortOrder
+    activityStatusId : SortOrder
+    status: ActivityStatusOrder
+    activityTypeId: SortOrder
+    type: ActivityTypeOrder
+}
+
+input ActivityStatusOrder
+{
+    activityStatusId: SortOrder
+    activityStatusDesc: SortOrder
+}
+
+input ActivityTypeOrder
+{
+    activityTypeId: SortOrder
+    activityDesc: SortOrder
+}
+
+enum SortOrder
+{
+    ASC
+    DESC
+}
