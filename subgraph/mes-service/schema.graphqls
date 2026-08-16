@@ -15,14 +15,12 @@ type Query
 
 input DepartmentFilter
 {
-    id: String
     departmentId: ID
     department: String
 }
 
 input DepartmentOrder
 {
-    id: SortOrder
     departmentId: SortOrder
     department: SortOrder
 }
@@ -61,7 +59,6 @@ type ProductionLineEdge
 
 input ProductionLineFilter
 {
-    id: String
     productionLineId: ID
     departmentId: Float
     line: String
@@ -70,7 +67,6 @@ input ProductionLineFilter
 #
 input ProductionLineOrder
 {
-    id: SortOrder
     productionLineId: SortOrder
     departmentId: SortOrder
     line: SortOrder
@@ -97,7 +93,6 @@ type PageInfo
 
 input ProductionUnitFilter
 {
-    id: String
     productionUnitId: ID
     unit: String
     productionLineId: Float
@@ -106,7 +101,6 @@ input ProductionUnitFilter
 
 input ProductionUnitOrder
 {
-    id: SortOrder
     productionUnitId: SortOrder
     unit: SortOrder
     productionLineId: SortOrder

@@ -70,6 +70,7 @@ type Activity implements Node @sharable
     type: ActivityType
     createdAt: String
     productionUnitId: Float
+    productionUnit: ProductionUnit @lookup
     processOrderId: Float
 }
 
@@ -111,4 +112,9 @@ enum SortOrder
 {
     ASC
     DESC
+}
+
+type ProductionUnit
+{
+    productionUnitId: Float
 }
