@@ -15,6 +15,12 @@ builder.Services
 builder.Services
     .AddHttpClient("fusion");
 
+// Attaches the HeaderPropagationMessageHandler to every HttpClient the DI container creates —
+// including whichever per-subgraph clients HotChocolate Fusion builds internally from
+// subgraph-config.json — so the Authorization/Site-Id headers captured below actually go out
+// on subgraph calls, regardless of what Fusion names those clients.
+builder.Services.ConfigureHttpClientDefaults(b => b.AddHeaderPropagation());
+
 builder.Services
     .AddFusionGatewayServer()
     .ModifyRequestOptions(opt=>
@@ -37,6 +43,10 @@ builder.Services
     .ConfigureFromFile("./supergraph/gateway.fgp", watchFileForUpdates: true);
 
 var app = builder.Build();
+
+// Must run before anything that makes outgoing subgraph calls: this is what actually captures
+// the configured headers off each incoming request into HeaderPropagationValues.
+app.UseHeaderPropagation();
 
 var graphQLServerOptions = new GraphQLServerOptions
 {
